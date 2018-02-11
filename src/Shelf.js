@@ -19,7 +19,7 @@ class Shelf extends Component {
           {this.props.books
             .filter(book => book.shelf === this.props.shelfName)
             .map(book =>
-              <li key={book.id} className="contact-list-item">
+              <li key={book.id}>
                 <Book book={book} />
               </li>
             )}
