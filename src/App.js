@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Shelve from "./Shelve";
+import Shelf from "./Shelf";
 
 class App extends Component {
   render() {
@@ -10,9 +10,9 @@ class App extends Component {
         <header className="list-books-title">
           <h1 className="App-title">My Reads</h1>
         </header>
-        <Shelve shelveName="Currenlty Reading" />
-        <Shelve shelveName="Want to Read" />
-        <Shelve shelveName="Read" />
+        <Shelf shelfTitle="Currenlty Reading" shelfName="currentlyReading"/>
+        <Shelf shelfTitle="Want to Read" shelfName="wantToRead"/>
+        <Shelf shelfTitle="Read" shelfName="read"/>
       </div>
     );
   }
