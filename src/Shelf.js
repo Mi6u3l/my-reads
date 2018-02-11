@@ -16,6 +16,7 @@ class Shelf extends Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
+      console.log(books);
     });
   }
 
@@ -30,7 +31,7 @@ class Shelf extends Component {
             .filter(book => book.shelf === this.props.shelfName)
             .map(book =>
               <li key={book.id} className="contact-list-item">
-                <Book title={book.title} />
+                <Book book={book} />
               </li>
             )}
         </ol>
