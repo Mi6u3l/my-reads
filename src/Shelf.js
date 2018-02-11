@@ -1,24 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as BooksAPI from "./utils/BooksAPI";
 import Book from "./Book";
 
 class Shelf extends Component {
   static propTypes = {
     shelfTitle: PropTypes.string.isRequired,
-    shelfName: PropTypes.string.isRequired
+    shelfName: PropTypes.string.isRequired,
+    books: PropTypes.array.isRequired
   };
-
-  state = {
-    books: []
-  };
-
-  componentDidMount() {
-    BooksAPI.getAll().then(books => {
-      this.setState({ books });
-      console.log(books);
-    });
-  }
 
   render() {
     return (
@@ -27,7 +16,7 @@ class Shelf extends Component {
           {this.props.shelfTitle}
         </h2>
         <ol className="books-grid">
-          {this.state.books
+          {this.props.books
             .filter(book => book.shelf === this.props.shelfName)
             .map(book =>
               <li key={book.id} className="contact-list-item">
