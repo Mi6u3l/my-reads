@@ -14,8 +14,7 @@ class ShelfSelect extends Component {
           onChange={event => {
             this.props.changeShelf(this.props.book, event.target.value);
           }}
-          defaultValue={this.props.book.shelf}
-        >
+          defaultValue={this.props.book.shelf}>
           <option value="" disabled>
             Move to...
           </option>

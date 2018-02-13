@@ -63,6 +63,9 @@ body, .app {
 }
 
 /* search page */
+.search-firstshelf {
+  margin-top: 70px;
+}
 
 .search-books-bar {
   position: fixed;
