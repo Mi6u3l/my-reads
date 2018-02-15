@@ -24,9 +24,12 @@ class App extends Component {
 
   getBookShelf = bookId => {
     const books = this.state.books;
-    return books.find(_book => {
+    let foundBook = books.find(_book => {
       return bookId == _book.id;
     });
+    if (foundBook) {
+      return foundBook.shelf;
+    }
   };
 
   changeShelf = (book, shelf) => {
