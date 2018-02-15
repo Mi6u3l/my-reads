@@ -22,6 +22,13 @@ class App extends Component {
     this.getAllBooks();
   };
 
+  getBookShelf = bookId => {
+    const books = this.state.books;
+    return books.find(_book => {
+      return bookId == _book.id;
+    });
+  };
+
   changeShelf = (book, shelf) => {
     const books = this.state.books;
 
@@ -60,18 +67,21 @@ class App extends Component {
               </header>
               <Shelf
                 changeShelf={this.changeShelf}
+                getBookShelf={this.getBookShelf}
                 books={this.state.books}
                 shelfTitle="Currenlty Reading"
                 shelfName="currentlyReading"
               />
               <Shelf
                 changeShelf={this.changeShelf}
+                getBookShelf={this.getBookShelf}
                 books={this.state.books}
                 shelfTitle="Want to Read"
                 shelfName="wantToRead"
               />
               <Shelf
                 changeShelf={this.changeShelf}
+                getBookShelf={this.getBookShelf}
                 books={this.state.books}
                 shelfTitle="Read"
                 shelfName="read"
@@ -84,7 +94,11 @@ class App extends Component {
         <Route
           path="/search"
           render={({ history }) =>
-            <Search changeShelf={this.changeShelf} books={this.state.books} />}
+            <Search
+              getBookShelf={this.getBookShelf}
+              changeShelf={this.changeShelf}
+              books={this.state.books}
+            />}
         />
       </div>
     );

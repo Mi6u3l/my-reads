@@ -8,7 +8,8 @@ class ShelfSelect extends Component {
   };
 
   render = () => {
-    let selectedValue = !this.props.book.shelf ? '' : this.props.book.shelf;
+    let stateBook = this.props.getBookShelf(this.props.book.id);
+    let selectedValue = !stateBook ? 'none' : stateBook.shelf;
     return (
       <div className="book-shelf-changer">
         <select

@@ -25,6 +25,7 @@ class Shelf extends Component {
                   books={this.props.books}
                   book={book}
                   changeShelf={this.props.changeShelf}
+                  getBookShelf={this.props.getBookShelf}
                 />
               </li>
             )}

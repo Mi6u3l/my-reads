@@ -51,6 +51,7 @@ class Search extends Component {
                   books={this.props.filteredBooks}
                   book={book}
                   changeShelf={this.props.changeShelf}
+                  getBookShelf={this.props.getBookShelf}
                 />
               </li>
             )}
