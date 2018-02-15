@@ -5,8 +5,7 @@ import ShelfSelect from "./ShelfSelect.js";
 class Book extends Component {
   static propTypes = {
     book: PropTypes.object.isRequired,
-    changeShelf: PropTypes.func.isRequired,
-    books: PropTypes.array.isRequired
+    changeShelf: PropTypes.func.isRequired
   };
 
   render = () => {
@@ -14,7 +13,14 @@ class Book extends Component {
     return (
       <div className="book">
         <div className="book-top">
-          <img className="book-cover" src={book.imageLinks !== undefined ? book.imageLinks.smallThumbnail : ''} />
+          <img
+            className="book-cover"
+            src={
+              book.imageLinks !== undefined
+                ? book.imageLinks.smallThumbnail
+                : ""
+            }
+          />
           <ShelfSelect books={books} changeShelf={changeShelf} book={book} />
         </div>
         <div className="book-title">
