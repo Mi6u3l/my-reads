@@ -20,17 +20,23 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getAllBooks();
-    console.log("did mount main");
   };
 
   changeShelf = (book, shelf) => {
     const books = this.state.books;
+    let bookExists = false;
     books.forEach(_book => {
       if (_book.id === book.id) {
+        bookExists = true;
         _book.shelf = shelf;
       }
     });
-    this.setState({ books });
+    if (!bookExists) {
+      books.push(book);
+    }
+    this.setState(state => ({
+      books
+    }));
     BooksAPI.update(book, shelf);
   };
 
@@ -70,9 +76,8 @@ class App extends Component {
         />
         <Route
           path="/search"
-          render={({ history }) => <Search 
-          changeShelf={this.changeShelf}
-          books={this.state.books} />}
+          render={({ history }) =>
+            <Search changeShelf={this.changeShelf} books={this.state.books} />}
         />
       </div>
     );

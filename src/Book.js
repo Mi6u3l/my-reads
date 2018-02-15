@@ -14,7 +14,7 @@ class Book extends Component {
     return (
       <div className="book">
         <div className="book-top">
-          <img className="book-cover" src={book.imageLinks.smallThumbnail} />
+          <img className="book-cover" src={book.imageLinks !== undefined ? book.imageLinks.smallThumbnail : ''} />
           <ShelfSelect books={books} changeShelf={changeShelf} book={book} />
         </div>
         <div className="book-title">

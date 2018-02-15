@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Shelf from "./Shelf";
+import Book from "./Book";
 import * as BooksAPI from "./utils/BooksAPI";
 import escapeRegExp from "escape-string-regexp";
 
@@ -11,14 +12,17 @@ class Search extends Component {
   };
 
   updateQuery = query => {
-    this.setState({ query: query.trim() });
+    this.setState({ query });
     if (query) {
-      const match = new RegExp(escapeRegExp(query), "i");
-      this.state.filteredBooks = this.props.books.filter(book =>
-        match.test(book.title)
-      );
+      BooksAPI.search(query).then(filteredBooks => {
+        if (filteredBooks.error) {
+          this.setState({ filteredBooks: [] });
+        } else {
+          this.setState({ filteredBooks });
+        }
+      });
     } else {
-      this.state.filteredBooks = [];
+      this.setState({ filteredBooks: [] });
     }
   };
 
@@ -39,25 +43,18 @@ class Search extends Component {
             />
           </div>
         </div>
-        <div className="search-firstshelf">
-          <Shelf
-            changeShelf={this.props.changeShelf}
-            books={this.state.filteredBooks}
-            shelfTitle="Currenlty Reading"
-            shelfName="currentlyReading"
-          />
-          <Shelf
-            changeShelf={this.props.changeShelf}
-            books={this.state.filteredBooks}
-            shelfTitle="Want to Read"
-            shelfName="wantToRead"
-          />
-          <Shelf
-            changeShelf={this.props.changeShelf}
-            books={this.state.filteredBooks}
-            shelfTitle="Read"
-            shelfName="read"
-          />
+        <div className="search-genericshelf">
+          <ol className="books-grid">
+            {this.state.filteredBooks.map(book =>
+              <li key={book.id}>
+                <Book
+                  books={this.props.filteredBooks}
+                  book={book}
+                  changeShelf={this.props.changeShelf}
+                />
+              </li>
+            )}
+          </ol>
         </div>
       </div>
     );
