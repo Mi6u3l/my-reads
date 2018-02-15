@@ -24,20 +24,27 @@ class App extends Component {
 
   changeShelf = (book, shelf) => {
     const books = this.state.books;
-    let bookExists = false;
-    books.forEach(_book => {
-      if (_book.id === book.id) {
-        bookExists = true;
-        _book.shelf = shelf;
-      }
+
+    //check if book is new i.e. came from search screen
+    let foundBook = books.find(_book => {
+      return book.id == _book.id;
     });
-    if (!bookExists) {
+    if (!foundBook) {
       books.push(book);
     }
+
+    //assigning the correct shelf to the book
+    let bookToUpdate = books.find(_book => {
+      return book.id == _book.id;
+    });
+    bookToUpdate.shelf = shelf;
+
     this.setState(state => ({
       books
     }));
-    BooksAPI.update(book, shelf);
+
+    //update book shelf on API
+    BooksAPI.update(bookToUpdate, shelf);
   };
 
   render = () => {
